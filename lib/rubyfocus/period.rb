@@ -1,10 +1,11 @@
-# The ReviewPeriod represents a review period used with Projects in OmniFocus
-# The ReviewPeriod is made up of three sections:
+# The Period represents a review period used with Projects, and for repeating tasks.
+#
+# The Period is made up of three sections:
 # * The precursor symbol (~ or @, use unknown)
 # * A numerical "size"
 # * A unit ([d]ays, [w]eeks, [m]onths or [y]ears)
 
-class Rubyfocus::ReviewPeriod
+class Rubyfocus::Period
 	attr_accessor :size, :unit
 
 	ALLOWED_UNITS = %i(days weeks months years)
@@ -15,7 +16,7 @@ class Rubyfocus::ReviewPeriod
 			unit = {"d" => :days, "w" => :weeks, "m" => :months, "y" => :years}[$2]
 			new(size: size, unit: unit)
 		else
-			raise ArgumentError, "Unrecognised review period format: \"#{str}\"."
+			raise ArgumentError, "Unrecognised period format: \"#{str}\"."
 		end
 	end
 
@@ -25,7 +26,7 @@ class Rubyfocus::ReviewPeriod
 	end
 
 	def unit= value
-		raise ArgumentError, "Tried to set ReviewPeriod.unit to invalid value \"#{value}\"." unless ALLOWED_UNITS.include?(value)
+		raise ArgumentError, "Tried to set Period.unit to invalid value \"#{value}\"." unless ALLOWED_UNITS.include?(value)
 		@unit = value
 		@short_unit = nil
 	end
@@ -41,3 +42,6 @@ class Rubyfocus::ReviewPeriod
 	alias_method :inspect, :to_s
 	alias_method :to_serial, :to_s
 end
+
+# For backwards compatibility
+Rubyfocus::ReviewPeriod = Rubyfocus::Period

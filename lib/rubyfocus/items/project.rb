@@ -13,7 +13,7 @@ class Rubyfocus::Project < Rubyfocus::Task
 			(node/"project").first.children.size > 0
 		)
 	end
-	
+
 	# Singleton: contains one-off tasks
 	attr_accessor :singleton
 
@@ -45,9 +45,9 @@ class Rubyfocus::Project < Rubyfocus::Task
 		# We're not always going to have a project! And this *doesn't* mean that this project is demoted
 		if p
 			conditional_set(:singleton, 			p.at_xpath("xmlns:singleton"))					{ |e| e.inner_html == "true" }
-			conditional_set(:review_interval, p.at_xpath("xmlns:review-interval") ) 	{ |e| Rubyfocus::ReviewPeriod.from_string(e.inner_html) }
+			conditional_set(:review_interval, p.at_xpath("xmlns:review-interval") ) 	{ |e| Rubyfocus::Period.from_string(e.inner_html) }
 			conditional_set(:last_review, 		p.at_xpath("xmlns:last-review"))				{ |e| Time.safely_parse e.inner_html }
-			conditional_set(:status,					p.at_xpath("xmlns:status"))							{ |e| e.inner_html.to_sym }							
+			conditional_set(:status,					p.at_xpath("xmlns:status"))							{ |e| e.inner_html.to_sym }
 		end
 	end
 

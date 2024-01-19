@@ -29,7 +29,7 @@ lib/rubyfocus/items/setting.rb
 lib/rubyfocus/items/task.rb
 lib/rubyfocus/location.rb
 lib/rubyfocus/patch.rb
-lib/rubyfocus/review_period.rb
+lib/rubyfocus/period.rb
 lib/rubyfocus/xml_translator.rb
 README.md
 rubyfocus.gemspec
